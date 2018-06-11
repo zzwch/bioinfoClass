@@ -5,4 +5,3 @@ Bioinformatics Class at LLLab
 https://github.com/jaywcjlove/linux-command
 
 
-`library(Seurat)`
