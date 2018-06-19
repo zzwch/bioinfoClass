@@ -36,3 +36,14 @@ https://github.com/jaywcjlove/linux-command
 9. Homework 5
 10. Session Info
 11. References
+### [](http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Rsequences_01.html "GEN242 Spring 2018") `Materials/Rsequences.pdf`  
+1. Overview
+2. Package Requirements
+3. Strings in R Base
+4. Sequences in Bioconductor
+5. NGS Sequences
+6. Range Operations
+7. Transcript Ranges
+8. Homework 6
+9. Session Info
+10. References
