@@ -24,7 +24,6 @@ https://github.com/jaywcjlove/linux-command
 17. Shiny Web Apps
 18. Session Info
 19. References
-
 ### [Programming in R](http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Programming_in_R_01.html "GEN242 Spring 2018") `Materials/Programming_in_R.pdf`  
 1. Overview
 2. Control Structures
