@@ -4,6 +4,9 @@ Bioinformatics Class at LLLab
 ### Linux Commad   
 https://github.com/jaywcjlove/linux-command
 
+### R, ggplot2 and Statistical Foundations [r-statistics.co](http://r-statistics.co/ "good")  
+>An educational resource for those seeking knowledge related to machine learning and statistical computing in R. Here, you will find quality articles, with working R code and examples, where, the goal is to make the #rstats concepts clear and as simple as possible.
+
 ### [Introduction to R](http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Rbasics_01.html "GEN242 Spring 2018") ([PDF](https://github.com/lizc07/bioinfoClass/blob/master/Materials/Rbasics.pdf "Materials/Rbasics.pdf"))   
 1. Overview
 2. R Package Repositories
