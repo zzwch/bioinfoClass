@@ -4,7 +4,7 @@ Bioinformatics Class at LLLab
 ### Linux Commad   
 https://github.com/jaywcjlove/linux-command
 
-### [Introduction to R](http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Rbasics_01.html "GEN242 Spring 2018")  - `Rbasics.pdf`   
+### [Introduction to R](http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Rbasics_01.html "GEN242 Spring 2018")  - `Materials/Rbasics.pdf` 
 1. Overview
 2. R Package Repositories
 3. Installation of R Packages
