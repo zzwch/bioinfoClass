@@ -25,3 +25,15 @@ https://github.com/jaywcjlove/linux-command
 18. Session Info
 19. References
 
+### [Programming in R](http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Programming_in_R_01.html "GEN242 Spring 2018") `Materials/Programming_in_R.pdf`  
+1. Overview
+2. Control Structures
+3. Loops
+4. Functions
+5. Useful Utilities
+6. Running R Scripts
+7. Building R Packages
+8. Programming Exercises
+9. Homework 5
+10. Session Info
+11. References
