@@ -42,8 +42,8 @@ https://github.com/jaywcjlove/linux-command
 3. ***Strings in R Base***
 4. ***Sequences in Bioconductor***
 5. ***NGS Sequences***
-6. Range Operations
-7. Transcript Ranges
-8. Homework 6
+6. ***Range Operations***
+7. ***Transcript Ranges***
+8. ***Homework 6***
 9. Session Info
 10. References
