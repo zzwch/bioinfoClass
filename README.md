@@ -7,6 +7,9 @@ Bioinformatics Class at LLLab
 >An educational resource for those seeking knowledge related to machine learning and statistical computing in R. Here, you will find quality articles, with working R code and examples, where, the goal is to make the #rstats concepts clear and as simple as possible.
 ### [Data Analysis in Genome Biology](http://girke.bioinformatics.ucr.edu/GEN242/ " Thomas Girke @University of California, Riverside")
 >This course introduces algorithms, statistical methods and data analysis programming routines relevant for genome biology. It consists of three main components: lectures, hands-on practicals and student course projects. The lecture topics cover databases, sequence (NGS) analysis, phylogenetics, comparative genomics, genome-wide profiling methods, network biology and more. The hands-on practicals include homework assignments and course projects focusing on data analysis programming of next generation genome data using command-line tools on a computer cluster and the programming environment R.
+### Visualization
+Visualizing Dendrograms in R https://rpubs.com/gaston/dendrograms
+
 ## For Slide_01
 ### Linux Commad   
 https://github.com/jaywcjlove/linux-command
@@ -55,5 +58,4 @@ https://github.com/jaywcjlove/linux-command
 8. ***Homework 6***
 9. Session Info
 10. References
-### Visualization
-https://rpubs.com/gaston/dendrograms
+
