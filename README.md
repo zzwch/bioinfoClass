@@ -55,3 +55,5 @@ https://github.com/jaywcjlove/linux-command
 8. ***Homework 6***
 9. Session Info
 10. References
+### Visualization
+https://rpubs.com/gaston/dendrograms
