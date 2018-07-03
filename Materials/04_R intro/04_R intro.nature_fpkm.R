@@ -1,29 +1,34 @@
 options(stringsAsFactors = F)
-
+library(reshape2)
 nature_fpkm <- read.csv(file = "Supplementary Table 3 RefSeq.Gene.Expression.Single.Cells.fixDate.csv", row.names = 1, check.names = F)
-nature_annot <- reshape2::colsplit(colnames(nature_fpkm), " #", c("CellType", "CellOrder"))
+nature_annot <- reshape2::colsplit(string = colnames(nature_fpkm), pattern = " #", names = c("CellType", "CellOrder"))
 rownames(nature_annot) <- colnames(nature_fpkm)
+table(nature_annot$CellType)
 nature_annot$Batch <- "Nature"
 
-annot <- nature_annot
-#annot <- subset(nature_annot, CellType %in% c("EC", "T1 pre-HSC", "T2 pre-HSC", "E12 HSC", "E14 HSC", "Adult HSC", "PreHSC"))
+write.csv(x = nature_annot, file = "nature_annot.csv")
+
+##
+#annot <- nature_annot
+annot <- subset(x = nature_annot, CellType %in% c("EC", "T1 pre-HSC", "T2 pre-HSC", "E12 HSC", "E14 HSC", "Adult HSC"))
 fpkm <- nature_fpkm[,rownames(annot)]
 
 # What's Principal Component Analysis?
 library(ggplot2)
 library(RColorBrewer)
-
+library(dichromat)
 data <- log2(fpkm+1)[names(which(rowSums(fpkm > 1) > 3)), ]
-data.sd <- apply(data, 1, sd)
+data.sd <- apply(X = data, MARGIN = 1, FUN = sd)
 data.gene <- names(sort(data.sd, decreasing = T)[1:1000])
 
 # Dimension Reduction - PCA
-res <- prcomp(data[data.gene,], scale. = T)
+res <- prcomp(x = data[data.gene,],center = T, scale. = T)
 
-ggplot(cbind(annot[rownames(res$rotation),], res$rotation)) + 
-  geom_point(aes(PC1, PC2, color = CellType, shape= Batch), size = 3) + 
+ggplot() + 
+  geom_point(data = cbind(annot[rownames(res$rotation),], res$rotation[,c("PC1","PC2")]),
+             mapping = aes(x = PC1,y =  PC2, color = CellType), size = 3) + 
   scale_color_manual(values = brewer.pal(12, "Paired")) + 
-  theme_bw()
+  theme_bw() + labs(title = "preHSC", x = "Dim1", y= "Dim2")
 
 gridExtra::grid.arrange(grobs = lapply(c("Pecam1","Procr", "Itga2b","Spn","Ptprc","Kit","Slamf1", "Hoxa5", "Kdr","Hlf", 
                                          "Nrp2", "Nr2f2","Runx1", "Gfi1","Myb","Hmmr", "Mki67", "Plk1"), function(x){
@@ -38,7 +43,6 @@ gridExtra::grid.arrange(grobs = lapply(c("Pecam1","Procr", "Itga2b","Spn","Ptprc
 # Hierarchical Clustering
 hc <- hclust(dist(t(data[data.gene,])), method = "ward.D")
 plot(hc)
-plot(hc, hang = -1)
 
 pheatmap::pheatmap(data[data.gene[1:100],], show_colnames = F, annotation_col = annot)
 
