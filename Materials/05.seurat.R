@@ -1,4 +1,4 @@
-setwd("/Users/hazard/Downloads/rstudio-export/")
+setwd("/data2/lzc/test")
 options(stringsAsFactors = F)
 rm(list = ls())
 geneset <- list()
@@ -60,17 +60,52 @@ pbmc <- RunPCA(object = pbmc, pcs.compute = 50)
 PCAPlot(pbmc, pt.size= 3, cols.use = pal_location, group.by = "Location", dim.1 = 3, dim.2 = 4)
 ## confounding - cell cycle
 pbmc <- CellCycleScoring(pbmc, g2m.genes = geneset$g2m, s.genes = geneset$g1s)
-FeaturePlot(pbmc, features.plot = c("S.Score", "G2M.Score", "Mki67", "Hmmr"), reduction.use = "pca")
+FeaturePlot(pbmc, features.plot = c("S.Score", "G2M.Score", "Mki67", "Hmmr"), reduction.use = "pca", cols.use = c("grey", "red"))
 PCAPlot(pbmc, pt.size= 3, cols.use = pal_rainbow, group.by = "Phase", dim.1 = 1, dim.2 =2)
 PCHeatmap(pbmc, pc.use = 9)
 ## tSNE
 PCElbowPlot(pbmc, num.pc = 50)
-pbmc <- RunTSNE(pbmc, reduction.use = "pca", dims.use = 1:10)
+pbmc <- RunTSNE(pbmc, reduction.use = "pca", dims.use = 1:10, dim.embed = 2)
+pbmc_gene <- RunTSNE(pbmc, genes.use = pbmc@var.genes) 
 pbmc <- RunTSNE(pbmc, reduction.use = "pca", dims.use = setdiff(1:10,9))
 pbmc@data <- as.matrix(pbmc@data)
 pbmc <- ScaleData(pbmc, vars.to.regress = c("nUMI"), do.cpp = T)
 TSNEPlot(pbmc, pt.size = 3, group.by = "Location",colors.use = pal_location)
+TSNEPlot(pbmc_gene, pt.size = 3, group.by = "Location",colors.use = pal_location)
+RunDiffusion()
+RunICA()
+RunCCA()
 ## DimPlot
+DimPlot(pbmc, reduction.use = "tsne", dim.1 = 2, dim.2 = 3, pt.size = 2, group.by = "Location", cols.use = pal_location)
 ## Clustering
+pbmc <- FindClusters(pbmc, reduction.type = "pca", dims.use = 1:10, k.param = 15, resolution = 0.2)
+pbmc@ident
+pbmc@meta.data$res.0.8
+TSNEPlot(pbmc)
+TSNEPlot(pbmc, group.by = "Location",colors.use = pal_location)
+TSNEPlot(pbmc, group.by = "Batch")
+
 ## DEGs
+degs <- FindAllMarkers(pbmc, logfc.threshold = log(2), test.use = "wilcox", min.pct = 0.25, only.pos = T)
+degs 
 ## Heatmap
+library(dplyr)
+degs.top <- degs %>% filter(p_val_adj < 0.05 & avg_logFC > 0 ) %>% group_by(cluster) %>% top_n(10, -p_val)
+DoHeatmap(pbmc, genes.use = degs.top$gene, slim.col.label = T, remove.key = T)
+
+
+
+pbmc@meta.data$Cluster <- plyr::mapvalues(pbmc@meta.data$res.0.2, c(0:3), c("Pan_EC", "Liver", "Brain", "Aorta"))
+pbmc <- SetAllIdent(pbmc, "Cluster")
+TSNEPlot(pbmc)
+
+BuildClusterTree(pbmc, pcs.use = 1:10)
+ClassifyCells(pbmc, classifier = BuildRFClassifier(pbmc, ))
+
+FeaturePlot()
+
+DoHeatmap(pbmc, genes.use = PCTopGenes(pbmc, 1))
+tmp <- as.data.frame(pbmc@dr$pca@gene.loadings)
+genes <- rownames(tmp)[order(tmp$PC1, decreasing = T)[1:20]]
+DoHeatmap(pbmc, genes.use = genes)
+SubsetData()
